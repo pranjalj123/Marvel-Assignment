@@ -74,13 +74,4 @@ class CustomImageView: UIImageView {
 }
 
 
-//MARK: Show Alert On Screen
-func showAlertView(title:String, message:String) {
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-    let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
-        (Result:UIAlertAction) -> Void in
-    }
-    alertController.addAction(okAction)
-    appDelegate.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-}
+

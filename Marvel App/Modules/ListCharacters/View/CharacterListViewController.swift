@@ -7,12 +7,13 @@
 
 import UIKit
 
-class CharacterListViewController: ParentViewController {
+class CharacterListViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var listTableView: UITableView!
     
     //MARK: Variables
     var characterListViewModel = CharacterListViewModel()
+    var progressLoader : UIActivityIndicatorView?
     
     //MARK: ViewLifeCycle
     override func viewDidLoad() {
@@ -24,6 +25,21 @@ class CharacterListViewController: ParentViewController {
         self.characterListViewModel.getCharacterList()
     }
     
+    //MARK: Set activity indicator on screen
+    func setActivityIndicator() {
+        progressLoader = ActivityProgressView.indicator(at: self.view.center)
+        self.view.addSubview(progressLoader!)
+        progressLoader?.startAnimating()
+    }
+    
+    //MARK: Show alert on screen
+    func showAlertView(title : String, message : String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 
@@ -82,3 +98,5 @@ extension CharacterListViewController: characterListViewModelProtocols {
         self.showAlertView(title: error, message: serverMsg)
     }
 }
+
+

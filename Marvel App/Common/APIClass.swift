@@ -34,9 +34,7 @@ class APIClass {
                 
             }
             task.resume()
-        } else {
-            showAlertView(title: internetIssue, message: connectToInternet)
-        }
+        } 
         
     }
 }

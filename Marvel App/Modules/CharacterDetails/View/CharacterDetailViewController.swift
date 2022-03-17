@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharacterDetailViewController: ParentViewController {
+class CharacterDetailViewController: UIViewController {
 
     //MARK: IBOutlets
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -16,6 +16,7 @@ class CharacterDetailViewController: ParentViewController {
     
     //MARK: Variables
     var detailViewModel : CharacterDetailViewModel?
+    var progressLoader : UIActivityIndicatorView?
     
     //MARK: VIewLifeCycle
     override func viewDidLoad() {
@@ -26,6 +27,24 @@ class CharacterDetailViewController: ParentViewController {
         self.detailViewModel?.getCharacterDetailAPI()
         
     }
+    
+    //MARK: Set activity indicator on screen
+    func setActivityIndicator() {
+        progressLoader = ActivityProgressView.indicator(at: self.view.center)
+        self.view.addSubview(progressLoader!)
+        progressLoader?.startAnimating()
+    }
+    
+    //MARK: show alert on screen
+    func showAlertView(title : String, message : String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) { (result : UIAlertAction) -> Void in
+            
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
     //MARK: Set data from API to outlets
     func setData() {
